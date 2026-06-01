@@ -1,0 +1,2570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEP Readiness 2026 — Internal Review</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    line-height: 1.6;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    padding: 72px 48px 60px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #7eb3f7;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+  .hero-subtitle {
+    font-size: 17px;
+    color: #a0b4cc;
+    max-width: 600px;
+    margin: 0 auto 40px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat .number {
+    font-size: 34px;
+    font-weight: 700;
+    color: #7eb3f7;
+  }
+  .hero-stat .label {
+    font-size: 12px;
+    color: #8899aa;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .hero-description {
+    font-size: 14px;
+    color: #8899aa;
+    max-width: 700px;
+    margin: 32px auto 0;
+    line-height: 1.7;
+  }
+  .hero-resources {
+    margin-top: 32px;
+  }
+  .hero-resources-label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #5a6a7a;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .hero-resources-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.6fr;
+    gap: 0;
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .hrc {
+    padding: 0 24px;
+    border-left: 1px solid #2a3a52;
+  }
+  .hrc:first-child { border-left: none; padding-left: 0; }
+  .hrc-header {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #5a6a7a;
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #2a3a52;
+  }
+  .hrc-subheader {
+    font-size: 11px;
+    color: #607080;
+    margin: 10px 0 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .hrc a {
+    display: block;
+    font-size: 13px;
+    color: #7eb3f7;
+    text-decoration: none;
+    line-height: 1.9;
+  }
+  .hrc a:hover { text-decoration: underline; }
+
+  /* NAV */
+  .nav {
+    background: white;
+    border-bottom: 1px solid #e5e5ea;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .nav a {
+    display: block;
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6e6e73;
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav a:hover { color: #1d1d1f; border-bottom-color: #0071e3; }
+  .nav a.active { color: #0071e3; border-bottom-color: #0071e3; font-weight: 600; }
+  .nav .nav-divider {
+    width: 1px;
+    background: #e5e5ea;
+    margin: 10px 8px;
+  }
+
+  /* TABS */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* CONTAINER */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    margin-bottom: 32px;
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0071e3;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .section-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .section-header p {
+    font-size: 15px;
+    color: #6e6e73;
+    max-width: 680px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid #e5e5ea;
+    margin: 40px 0;
+  }
+
+  /* SUBSECTION */
+  .subsection { margin-bottom: 40px; }
+  .subsection h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #1d1d1f;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border: 1px solid #e5e5ea;
+  }
+  .stat-card .stat-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0071e3;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .stat-card .stat-label {
+    font-size: 12px;
+    color: #6e6e73;
+    line-height: 1.4;
+  }
+  .stat-card .stat-source {
+    font-size: 10px;
+    color: #aaa;
+    margin-top: 4px;
+  }
+
+  /* TWO-COL CARDS */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
+
+  .insight-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border: 1px solid #e5e5ea;
+  }
+  .insight-card.green { border-left: 4px solid #34c759; }
+  .insight-card.red { border-left: 4px solid #ff3b30; }
+  .insight-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1d1d1f;
+  }
+  .insight-card p, .insight-card li {
+    font-size: 14px;
+    color: #3a3a3c;
+    line-height: 1.6;
+  }
+  .insight-card ul { padding-left: 18px; }
+  .insight-card li { margin-bottom: 6px; }
+
+  /* QUOTES */
+  .quotes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .quote-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border: 1px solid #e5e5ea;
+    position: relative;
+  }
+  .quote-card::before {
+    content: '\201C';
+    font-size: 48px;
+    color: #e5e5ea;
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    line-height: 1;
+    font-family: Georgia, serif;
+  }
+  .quote-card blockquote {
+    font-size: 14px;
+    color: #3a3a3c;
+    line-height: 1.7;
+    font-style: italic;
+    padding-top: 24px;
+    margin-bottom: 12px;
+  }
+  .quote-card .attribution {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6e6e73;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* STAKEHOLDER TABLE */
+  .stakeholder-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border: 1px solid #e5e5ea;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .stakeholder-table th {
+    background: #f5f5f7;
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6e6e73;
+    border-bottom: 1px solid #e5e5ea;
+  }
+  .stakeholder-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #f0f0f2;
+    color: #3a3a3c;
+  }
+  .stakeholder-table tr:last-child td { border-bottom: none; }
+
+  /* WHAT WE DID LIST */
+  .did-list {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border: 1px solid #e5e5ea;
+    margin-bottom: 24px;
+  }
+  .did-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f2;
+  }
+  .did-item:last-child { border-bottom: none; }
+  .did-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .did-item-body strong {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1d1d1f;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .did-item-body span {
+    font-size: 13px;
+    color: #6e6e73;
+  }
+
+  /* STAKEHOLDER COMPACT */
+  .stakeholder-compact {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e5e5ea;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .stakeholder-compact-group {
+    padding: 12px 16px 8px;
+    border-bottom: 1px solid #f0f0f2;
+  }
+  .stakeholder-compact-group:last-child { border-bottom: none; }
+  .stakeholder-compact-group .group-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #aaa;
+    margin-bottom: 8px;
+  }
+  .stakeholder-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .stakeholder-chip {
+    font-size: 12px;
+    background: #f5f5f7;
+    border: 1px solid #e5e5ea;
+    border-radius: 20px;
+    padding: 4px 10px;
+    color: #3a3a3c;
+    line-height: 1.4;
+  }
+  .stakeholder-chip span {
+    color: #aaa;
+    margin-left: 4px;
+  }
+
+  /* RETRO INFO CARD */
+  .retro-card {
+    background: #f0f6ff;
+    border: 1px solid #c5dcff;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .retro-card-intro {
+    flex: 1;
+    min-width: 220px;
+  }
+  .retro-card-intro h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0071e3;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .retro-card-intro p {
+    font-size: 13px;
+    color: #3a3a3c;
+    line-height: 1.6;
+  }
+  .retro-card-intro a {
+    color: #0071e3;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .retro-card-intro a:hover { text-decoration: underline; }
+  .retro-sources {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .retro-source-pill {
+    background: white;
+    border: 1px solid #c5dcff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #3a3a3c;
+    min-width: 130px;
+  }
+  .retro-source-pill strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0071e3;
+    margin-bottom: 2px;
+  }
+
+  /* PLACEHOLDER */
+  .placeholder {
+    background: white;
+    border-radius: 12px;
+    padding: 64px 32px;
+    text-align: center;
+    border: 1px dashed #c7c7cc;
+  }
+  .placeholder h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #c7c7cc;
+    margin-bottom: 8px;
+  }
+  .placeholder p { font-size: 14px; color: #c7c7cc; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Spark Advisors · Internal Review</div>
+  <h1>AEP Readiness 2026</h1>
+  <p class="hero-subtitle">A synthesis of what we heard from stakeholders and teams across the 2026 AEP season — to inform how we approach 2027.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="number">320</div>
+      <div class="label">Agents Surveyed</div>
+    </div>
+    <div class="hero-stat">
+      <div class="number">47</div>
+      <div class="label">Internal Respondents</div>
+    </div>
+    <div class="hero-stat">
+      <div class="number">4</div>
+      <div class="label">Retro Sessions</div>
+    </div>
+    <div class="hero-stat">
+      <div class="number">8</div>
+      <div class="label">Workstreams</div>
+    </div>
+  </div>
+  <p class="hero-description">A retrospective on Spark's 2026 AEP readiness cycle. This document synthesizes findings from 320 agent surveys, 47 internal team and stakeholder respondents, and structured retros across four workstream teams — covering what held up under pressure, where critical gaps emerged, and what changes would most improve the 2027 cycle. Each tab below presents findings from a specific workstream, grounded in both quantitative survey data and qualitative themes from the retros. Source materials are linked below.</p>
+  <div class="hero-resources">
+    <div class="hero-resources-label">Source Materials</div>
+    <div class="hero-resources-grid">
+      <div class="hrc">
+        <div class="hrc-header">X-Functional Work</div>
+        <a href="https://app.notion.com/p/sparkadvisors/AEP-Readiness-2026-2215ab3fc27580b1adc9c85abea18b4a" target="_blank">Stakeholder Tracker</a>
+      </div>
+      <div class="hrc">
+        <div class="hrc-header">Agent Feedback</div>
+        <a href="https://claude.ai/artifacts/latest/f02ee04f-9b8e-4c5b-af75-1588e4c8e504" target="_blank">Survey Analysis</a>
+        <a href="https://docs.google.com/spreadsheets/d/1Nfkn70SsVnYVGhzPgHbZYVYgLxCYle4i84cYNhUpYWk/edit?gid=1474841611#gid=1474841611" target="_blank">Survey Raw Data</a>
+      </div>
+      <div class="hrc">
+        <div class="hrc-header">Internal Feedback</div>
+        <div class="hrc-subheader">Retros</div>
+        <a href="https://fathom.video/share/1x8W-6knCF8mx8tNuaskHeQ-dkxd9Wdz" target="_blank">Product Release</a>
+        <a href="https://fathom.video/share/B6S-nxvkgSawWasriw4W5Nwmge1Gcm5F" target="_blank">External Comms</a>
+        <a href="https://fathom.video/share/99vyLzWigcNdHCRxbRNPxr9KtyrcPcUC" target="_blank">Internal Training</a>
+        <a href="https://fathom.video/share/zj9hUN9_2BCqbWGn4fFnA8tC1GNxwrvj" target="_blank">AEP Readiness Program Retro</a>
+        <div class="hrc-subheader">Internal Team Survey</div>
+        <a href="https://docs.google.com/presentation/d/19klEMW1dcTOMZ4Ce9awK-egxEAOPU_nluiPbyShzABE/edit?slide=id.g372088b2972_0_92#slide=id.g372088b2972_0_92" target="_blank">Agent Success Teams Retro</a>
+        <a href="https://docs.google.com/spreadsheets/d/1d7DRAVBtNRTyACSZ6pvCykLw3hLYGLis3uJrVcWUt48/edit?resourcekey&usp=forms_web_b&urp=linked#gid=770684056" target="_blank">Program Stakeholder Retro</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="active" onclick="showTab('program', this); return false;">AEP Readiness Program</a>
+  <a href="#" onclick="showTab('comms', this); return false;">External Communications</a>
+  <a href="#" onclick="showTab('product', this); return false;">Product Release</a>
+  <a href="#" onclick="showTab('training', this); return false;">Internal Training</a>
+  <a href="#" onclick="showTab('compliance', this); return false;">Compliance</a>
+  <div class="nav-divider"></div>
+  <a href="#" onclick="showTab('agent-services', this); return false;">Agent Services</a>
+  <a href="#" onclick="showTab('contracting', this); return false;">Contracting</a>
+  <a href="#" onclick="showTab('account-mgmt', this); return false;">Account Management</a>
+</nav>
+
+<!-- ==================== TAB 1: AEP READINESS PROGRAM ==================== -->
+<div id="tab-program" class="tab-content active">
+<div class="container">
+
+  <div class="section-header">
+    <div class="section-eyebrow">Workstream</div>
+    <h2>AEP Readiness Program</h2>
+    <p>How we coordinated the cross-functional effort — and what stakeholders and teams said about it.</p>
+  </div>
+
+  <!-- RETRO / ABOUT THIS DATA -->
+  <div class="retro-card">
+    <div class="retro-card-intro">
+      <h4>About this feedback</h4>
+      <p>The feedback and data on this page comes from four workstream retro sessions held in December 2025, two post-AEP surveys, and a compiled summary deck. The full AEP Readiness hub from last year is available in <a href="https://app.notion.com/p/sparkadvisors/AEP-Readiness-2026-2215ab3fc27580b1adc9c85abea18b4a" target="_blank">Notion →</a></p>
+    </div>
+    <div class="retro-sources">
+      <div class="retro-source-pill">
+        <strong>4 Retro Sessions</strong>
+        Workstream-specific calls held in December 2025
+      </div>
+      <div class="retro-source-pill">
+        <strong>13 Stakeholder Leads</strong>
+        Stakeholder Retro Survey — function leads &amp; managers
+      </div>
+      <div class="retro-source-pill">
+        <strong>34 Team Members</strong>
+        Team Retro Survey — individual contributors across functions
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT WE DID -->
+  <div class="subsection">
+    <h3>What we did</h3>
+    <p style="font-size:14px; color:#6e6e73; margin-bottom:16px;">The AEP Readiness Program was the cross-functional coordination layer that ran from early August through December 7, 2025. It provided structure across four workstreams — External Communications, Product Release, and Internal Training, plus program-level oversight — to align on priorities, surface blockers, and move decisions forward. The season wrapped with a series of workstream-specific retro sessions in December.</p>
+    <div class="did-list">
+      <div class="did-item">
+        <div class="did-icon">🔄</div>
+        <div class="did-item-body">
+          <strong>AEP Readiness Sync</strong>
+          <span>Bi-weekly cross-functional meeting with leads across workstreams — primary venue for status updates, decisions, and escalations</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🛠</div>
+        <div class="did-item-body">
+          <strong>Product Release Sync</strong>
+          <span>Separate bi-weekly sync focused on the product and tech roadmap, keeping that workstream on its own cadence</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">💬</div>
+        <div class="did-item-body">
+          <strong>#aep-2026 (Slack)</strong>
+          <span>Primary async channel for day-to-day updates, announcements, and coordination between syncs</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📋</div>
+        <div class="did-item-body">
+          <strong>Shared Notion Hub</strong>
+          <span>Centralized documentation: workstream tracker, tech roadmap, stakeholder list, weekly sync notes, and objectives — <a href="https://app.notion.com/p/sparkadvisors/AEP-Readiness-2026-2215ab3fc27580b1adc9c85abea18b4a" target="_blank" style="color:#0071e3; text-decoration:none; font-weight:500;">View in Notion →</a></span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📅</div>
+        <div class="did-item-body">
+          <strong>AEP Readiness Google Calendar</strong>
+          <span>Shared calendar keeping key dates, deadlines, and meeting series visible to all stakeholders</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🌐</div>
+        <div class="did-item-body">
+          <strong>AEP Help Center</strong>
+          <span>External-facing resource page for agents surfacing plan info, tools, and readiness materials</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHO WAS INVOLVED -->
+  <div class="subsection">
+    <h3>Who was involved</h3>
+    <div class="stakeholder-compact">
+      <div class="stakeholder-compact-group">
+        <div class="group-label">Key Stakeholders — core program owners</div>
+        <div class="stakeholder-chips">
+          <div class="stakeholder-chip">Jon <span>AEP Readiness &amp; Carrier Relations</span></div>
+          <div class="stakeholder-chip">Erin <span>Marketing &amp; Comms</span></div>
+          <div class="stakeholder-chip">Jenna &amp; Mo <span>Product</span></div>
+          <div class="stakeholder-chip">Marisabel <span>Documentation</span></div>
+          <div class="stakeholder-chip">Britney <span>Tier 1</span></div>
+          <div class="stakeholder-chip">Asheley <span>PSS &amp; Client Services</span></div>
+          <div class="stakeholder-chip">Liz <span>Success</span></div>
+          <div class="stakeholder-chip">Pam <span>Training &amp; Compliance</span></div>
+        </div>
+      </div>
+      <div class="stakeholder-compact-group">
+        <div class="group-label">Contributing Stakeholders — involved as needed</div>
+        <div class="stakeholder-chips">
+          <div class="stakeholder-chip">Brian <span>Data / Eng</span></div>
+          <div class="stakeholder-chip">Marielle <span>Contracting</span></div>
+          <div class="stakeholder-chip">Charlie <span>Account Management</span></div>
+          <div class="stakeholder-chip">Caleb <span>Sales</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- BY THE NUMBERS -->
+  <div class="subsection">
+    <h3>By the numbers</h3>
+    <p style="font-size:13px; color:#6e6e73; margin-bottom:16px;">From 13 stakeholder leads + 34 team members surveyed post-AEP</p>
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-number">3.2<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Avg preparedness — stakeholder leads</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3.3<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Avg preparedness — broader team (34 respondents)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3.9<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Helpfulness of the AEP Readiness initiative overall</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4.5<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Confidence we'll be better prepared next year</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">54%</div>
+        <div class="stat-label">Rated cross-functional syncs "Very helpful"</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">29<span style="font-size:16px;color:#aaa">/34</span></div>
+        <div class="stat-label">Team members who rated themselves as prepared (3+)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT AGENTS SAID -->
+  <div class="subsection">
+    <h3>What agents said</h3>
+    <p style="font-size:14px; color:#6e6e73; margin-bottom:16px;">From 320 agents surveyed after AEP — rating their overall preparedness and how well Spark equipped them across key topics.</p>
+    <div class="stats-bar" style="margin-bottom:20px;">
+      <div class="stat-card">
+        <div class="stat-number">3.97<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Avg agent self-reported preparedness — 71% rated 4+</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4.11<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Training resources effectiveness — 77% rated 4+</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">9%</div>
+        <div class="stat-label">Rated themselves unprepared (1–2) — a meaningful minority</div>
+      </div>
+    </div>
+    <p style="font-size:13px; font-weight:600; color:#1d1d1f; margin-bottom:10px;">Topic-by-topic: where agents felt strong vs. where gaps remained</p>
+    <div style="background:white; border:1px solid #e5e5ea; border-radius:12px; overflow:hidden; margin-bottom:20px; box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+      <table style="width:100%; border-collapse:collapse; font-size:13px;">
+        <thead>
+          <tr style="background:#f5f5f7;">
+            <th style="padding:10px 16px; text-align:left; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#6e6e73; border-bottom:1px solid #e5e5ea;">Topic</th>
+            <th style="padding:10px 16px; text-align:center; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#6e6e73; border-bottom:1px solid #e5e5ea;">Avg Score</th>
+            <th style="padding:10px 16px; text-align:center; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#6e6e73; border-bottom:1px solid #e5e5ea;">% Rated 4+</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #f0f0f2;">
+            <td style="padding:10px 16px; color:#3a3a3c;">AHIP / Carrier certifications</td>
+            <td style="padding:10px 16px; text-align:center; font-weight:600; color:#34c759;">4.54 / 5</td>
+            <td style="padding:10px 16px; text-align:center; color:#34c759;">88%</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f2;">
+            <td style="padding:10px 16px; color:#3a3a3c;">Compliance</td>
+            <td style="padding:10px 16px; text-align:center; font-weight:600; color:#34c759;">4.52 / 5</td>
+            <td style="padding:10px 16px; text-align:center; color:#34c759;">87%</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f2;">
+            <td style="padding:10px 16px; color:#3a3a3c;">Contracting / Ready to Sell 2026</td>
+            <td style="padding:10px 16px; text-align:center; font-weight:600; color:#34c759;">4.18 / 5</td>
+            <td style="padding:10px 16px; text-align:center; color:#34c759;">78%</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f2;">
+            <td style="padding:10px 16px; color:#3a3a3c;">Strategies &amp; best practices</td>
+            <td style="padding:10px 16px; text-align:center; font-weight:600; color:#34c759;">4.12 / 5</td>
+            <td style="padding:10px 16px; text-align:center; color:#34c759;">76%</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f2;">
+            <td style="padding:10px 16px; color:#3a3a3c;">Carrier first looks</td>
+            <td style="padding:10px 16px; text-align:center; font-weight:600; color:#34c759;">4.03 / 5</td>
+            <td style="padding:10px 16px; text-align:center; color:#34c759;">73%</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f2;">
+            <td style="padding:10px 16px; color:#3a3a3c;">Industry news &amp; carrier strategy</td>
+            <td style="padding:10px 16px; text-align:center; font-weight:600; color:#f59e0b;">3.83 / 5</td>
+            <td style="padding:10px 16px; text-align:center; color:#f59e0b;">65%</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 16px; color:#3a3a3c;">Non-commissionable plans / plan exits</td>
+            <td style="padding:10px 16px; text-align:center; font-weight:600; color:#ff3b30;">3.79 / 5</td>
+            <td style="padding:10px 16px; text-align:center; color:#ff3b30;">63%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="two-col">
+      <div class="insight-card green">
+        <h4>Strong across certification and compliance topics</h4>
+        <p>Agents rated AHIP/certifications and compliance highest of all topics — areas where Spark's readiness efforts were most structured and had the clearest timelines.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Non-commissionable plans were the biggest knowledge gap</h4>
+        <p>With the lowest score of any topic (3.79/5), non-comm plans and plan exits were where agents felt least prepared — a complex, high-stakes area that required more proactive education.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Overall preparedness was solid given the season's chaos</h4>
+        <p>3.97/5 and 77% finding training resources effective is a meaningful result given how turbulent AEP 2026 was — carrier changes, plan exits, and new processes all landing mid-season.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Agents wanted more hands-on, scenario-based training</h4>
+        <p>The top ask was better training format — real client scenarios and demos rather than fast-moving slide decks. Agents also flagged wanting direct answers from support rather than being pointed to training videos.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- WHAT WORKED / WHAT DIDN'T -->
+  <div class="subsection">
+    <h3>What worked &amp; what didn't</h3>
+    <div class="two-col">
+      <div class="insight-card green">
+        <h4>The framework held under pressure</h4>
+        <p>Despite a tumultuous AEP, the program structure helped the company stay functional. 20+ survey respondents reported feeling prepared going into AEP.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>We started earlier — but still not early enough</h4>
+        <p>The August start created a reactive, fire-drill pace. Multiple stakeholders felt planning should start in Q2 or immediately following the prior AEP.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>More coordinated than the prior year</h4>
+        <p>Stakeholders noted improved visibility into ownership and clearer cross-functional workflows compared to the prior AEP.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>No true single source of truth</h4>
+        <p>Info lived across Slack, Notion, email, and the Help Center — making it easy to miss critical updates and hard to know where to look.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>One point of contact made a real difference</h4>
+        <p>Having a dedicated program lead to triage questions, translate complex carrier changes, and provide historical context was critical — especially with many new hires.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Ownership gaps created confusion</h4>
+        <p>It was often unclear who owned key decisions once things kicked off. Webinars and suppressions were specifically called out as unclear.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>New hires were set up well</h4>
+        <p>The program helped onboarded employees understand the importance and challenges of AEP — a genuine success called out across multiple respondents.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Too much weight on one person</h4>
+        <p>The program relied on a single point of contact in a way that wasn't sustainable. It worked as a workaround, not a scalable solution.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>One-to-many channels unlocked more reach</h4>
+        <p>Newsletters and webinars proved more effective than the high-touch, one-on-one interactions of prior years.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Account Management was underrepresented</h4>
+        <p>AM's volume during AEP made it hard to participate in stakeholder work — and their feedback reflected it, with AM reporting the lowest preparedness of any team.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>The AEP calendar was a hit</h4>
+        <p>Multiple respondents called it out as a concrete improvement — keeping key dates and meetings visible to all stakeholders throughout the season.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Teams felt they couldn't push back</h4>
+        <p>The program didn't create enough space to manage scope or decline requests, contributing to feeling under-resourced and reactive.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- KEY QUOTES -->
+  <div class="subsection">
+    <h3>Key quotes</h3>
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <blockquote>As a control freak, it was really helpful to feel like there was a solid plan, and even when things got stressful, we could all stay on track.</blockquote>
+        <div class="attribution">JS — Stakeholder</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>The weekly syncs were incredibly helpful to stay on top of shifting timelines and emerging news.</blockquote>
+        <div class="attribution">FL — Stakeholder</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>After it kicked off, it was hard to figure out who owned what.</blockquote>
+        <div class="attribution">CB — Stakeholder</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>The main issue was that the information didn't stay centralized. Information about AEP often ended up scattered across multiple channels, which meant I was hunting for details rather than having one reliable place to find everything.</blockquote>
+        <div class="attribution">AG — Stakeholder</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>I felt like I kept getting asked "what else do you want" but it was a lot of "we don't know what we don't know." I think seasoned AEP employees (2+ AEPs) should be accountable for knowing what to prep the team on.</blockquote>
+        <div class="attribution">LF — Stakeholder</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>We should invest in shifting team mentalities to prepare mentally to really push on the gas. AEP is the biggest time of the year for Spark — having a pre-emptive readiness to go into this together would be really helpful.</blockquote>
+        <div class="attribution">JS — Stakeholder</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<!-- END TAB 1 -->
+
+<!-- ==================== TAB 2: EXTERNAL COMMUNICATIONS ==================== -->
+<div id="tab-comms" class="tab-content">
+<div class="container">
+
+  <div class="section-header">
+    <div class="section-eyebrow">Workstream</div>
+    <h2>External Communications</h2>
+    <p>How we communicated with agents and agencies throughout the AEP season — and what worked (and didn't) in the process.</p>
+  </div>
+
+  <!-- RETRO CARD -->
+  <div class="retro-card">
+    <div class="retro-card-intro">
+      <h4>About this feedback</h4>
+      <p>Feedback comes from the External Comms retro session held December 3, 2025, the post-AEP stakeholder survey, and team survey responses. The full AEP Readiness hub is available in <a href="https://app.notion.com/p/sparkadvisors/AEP-Readiness-2026-2215ab3fc27580b1adc9c85abea18b4a" target="_blank">Notion →</a></p>
+    </div>
+    <div class="retro-sources">
+      <div class="retro-source-pill">
+        <strong>Dec 3 Retro</strong>
+        External Comms workstream session — 55 min
+      </div>
+      <div class="retro-source-pill">
+        <strong>13 Stakeholder Leads</strong>
+        Post-AEP stakeholder survey
+      </div>
+      <div class="retro-source-pill">
+        <strong>34 Team Members</strong>
+        Team retro survey — individual contributors
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT WE DID -->
+  <div class="subsection">
+    <h3>What we did</h3>
+    <p style="font-size:14px; color:#6e6e73; margin-bottom:16px;">The External Communications workstream covered every channel used to reach agents and agency principals before and during AEP. Erin and Fiona owned marketing execution, with Jon serving as the central intake funnel and SMEs from across the business feeding content into the pipeline.</p>
+    <div class="did-list">
+      <div class="did-item">
+        <div class="did-icon">📰</div>
+        <div class="did-item-body">
+          <strong>Weekly AEP Newsletter</strong>
+          <span>Sent every week from July through Oct 15 to all agents; covered platform updates, carrier news, key dates, and AEP strategy</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🤝</div>
+        <div class="did-item-body">
+          <strong>Weekly Newsletter Sync</strong>
+          <span>Standing sync between the AEP Readiness leader and marketing to align on newsletter content, priorities, and upcoming sends</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📝</div>
+        <div class="did-item-body">
+          <strong>Marketing Brief Request (Slack)</strong>
+          <span>Form-based intake process for teams to request ad hoc comms; standardized how requests came in and reduced back-and-forth</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">✅</div>
+        <div class="did-item-body">
+          <strong>SME Approval Process</strong>
+          <span>Subject matter experts reviewed and approved newsletter content before it went out to agents</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🎙️</div>
+        <div class="did-item-body">
+          <strong>Webinars</strong>
+          <span>Rapid-response sessions on high-priority topics (non-commissionable plans, HRAs, plan exits, co-op, etc.); also included an AEP kickoff webinar</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">⚡</div>
+        <div class="did-item-body">
+          <strong>Ad Hoc Comms</strong>
+          <span>One-off communications on carrier updates, suppressions, compliance issues, and unplanned events throughout the season</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📖</div>
+        <div class="did-item-body">
+          <strong>AEP Booklets</strong>
+          <span>Reference guide distributed to agents at the start of the season</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">💬</div>
+        <div class="did-item-body">
+          <strong>SMS to Agency Principals</strong>
+          <span>New channel tested this year to reach APs directly with time-sensitive updates</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📱</div>
+        <div class="did-item-body">
+          <strong>Social Media</strong>
+          <span>Posts to the Independent Medicare Network and Facebook</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🌎</div>
+        <div class="did-item-body">
+          <strong>Spanish Translation</strong>
+          <span>Selected content translated for Spanish-speaking agents and agency principals</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- BY THE NUMBERS -->
+  <div class="subsection">
+    <h3>By the numbers</h3>
+    <p style="font-size:13px; color:#6e6e73; margin-bottom:16px;">From 13 stakeholder leads surveyed post-AEP</p>
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-number">4.0<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">External comms effectiveness overall</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">43%</div>
+        <div class="stat-label">Newsletter open rate (36k opens)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">~12%</div>
+        <div class="stat-label">Newsletter click-through rate</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">69%</div>
+        <div class="stat-label">Rated webinars "Very helpful"</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">62%</div>
+        <div class="stat-label">Rated newsletter "Very helpful"</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">69%</div>
+        <div class="stat-label">Booklet impact — "Not sure"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT AGENTS SAID -->
+  <div class="subsection">
+    <h3>What agents said</h3>
+    <p style="font-size:14px; color:#6e6e73; margin-bottom:16px;">From 320 agents surveyed after AEP — rating the external resources Spark provided to help them prepare.</p>
+    <div class="stats-bar" style="margin-bottom:20px;">
+      <div class="stat-card">
+        <div class="stat-number">3.95<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Training webinars — 63% rated 4+</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3.94<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Help center resources — 64% rated 4+</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3.77<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Weekly agent newsletter — 57% rated 4+</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3.74<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">AEP booklet — 53% rated 4+</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="insight-card green">
+        <h4>Newsletters and needs assessments appreciated</h4>
+        <p>Agents mentioned newsletters and outreach tools as helpful for client communication and staying organized. The needs assessment workflow was specifically called out as a time saver.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Webinars rated highest of all external channels</h4>
+        <p>Agents who engaged with training webinars gave them the highest ratings of any external resource — reinforcing the internal finding that webinars were the breakout channel of the season.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Booklet impact remains unclear</h4>
+        <p>The booklet scored the lowest of all resources among agents (3.74/5) — consistent with the internal team finding where 69% of stakeholders said they weren't sure if it was helpful.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Agents want more reinforcement, not just more content</h4>
+        <p>Multiple agents noted that emails and updates go unread. The ask wasn't more communication — it was more active reinforcement of key messages through multiple channels.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- WHAT WORKED / WHAT DIDN'T -->
+  <div class="subsection">
+    <h3>What worked &amp; what didn't</h3>
+    <div class="two-col">
+      <div class="insight-card green">
+        <h4>Newsletter performance was strong</h4>
+        <p>43% open rate and ~12% CTR are well above industry benchmarks — agents were reading it, and teams noticed fewer confusion-driven support calls as a result.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>The process was not sustainable</h4>
+        <p>Marketing (Erin, Fiona, and one copywriter) was overwhelmed by volume. The team never got more than 2–3 days ahead of sends — far short of the planned 1–2 week window.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Webinars became a breakout channel</h4>
+        <p>Rapid-response webinars on non-commissionable plans, HRAs, and plan exits were the highest-rated external channel — a clear win that validated webinars as a core tool.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Reactive, not strategic</h4>
+        <p>Comms were driven by what came in rather than a proactive plan. Too many one-off sends that could have been batched into the newsletter, adding to marketing's load.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Marketing brief request streamlined intake</h4>
+        <p>Standardizing how teams submitted comms requests made the process cleaner — called out as a genuine improvement over the prior year's ad hoc approach.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Decision-making bottleneck created swirl</h4>
+        <p>Many teams had input on what got communicated, but approvals funneled through a narrow group of senior stakeholders — causing delays and internal confusion for marketing.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>SMEs distilled complex info well</h4>
+        <p>Subject matter experts across the business were effective at translating carrier updates and product changes into content marketing could actually use.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>No single source of truth for support teams</h4>
+        <p>Britney and Asheley's teams couldn't easily find what had been sent to agents. Agents called in about comms support had no context for — or found outdated versions.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>SMS and new channels validated</h4>
+        <p>Successfully tested SMS to agency principals and expanded beyond email-only. These channels are now proven and ready to scale for 2027.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Uncoordinated webinar strategy</h4>
+        <p>No single owner managed the webinar calendar. Conflicting schedules and reactive overuse led to agent fatigue and webinars cannibalizing each other's attendance.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Proactive comms reduced support noise</h4>
+        <p>Agents who received consistent weekly updates came into the support inbox better informed — a direct quality-of-life improvement for Tier 1 and PSS teams.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Newsletter became too long</h4>
+        <p>Ad hoc requests from leadership kept bloating the content, diluting focus. Agents received too much information at once with no clear prioritization.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- KEY QUOTES -->
+  <div class="subsection">
+    <h3>Key quotes</h3>
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <blockquote>The marketing brief request was a total game changer. It really helped streamline how we prepared and communicated updates.</blockquote>
+        <div class="attribution">AG — Stakeholder</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>We never truly got ahead of newsletters in the ideal 1–2 week window as planned. Having to make changes 2–3 days ahead felt like it became the norm — and is a BIG time suck.</blockquote>
+        <div class="attribution">ET — Stakeholder</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>We sometimes drag our feet about how/if we should message APs about industry topics instead of opting for over-communication and showcasing our insight as a leader in this confusing time of year.</blockquote>
+        <div class="attribution">AM — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>It was very helpful that we got the emails with the content prior to being released to the field.</blockquote>
+        <div class="attribution">Sales — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>In general, agents don't really pay much attention to emails or updates, so I think we should be more active in reinforcing those messages and making sure they actually read and understand them.</blockquote>
+        <div class="attribution">AM — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>Our internal ability to consistently locate the comms we sent out was a challenge. Updates were spread across Slack threads, email announcements, and the Help Center.</blockquote>
+        <div class="attribution">CX — Team</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== TAB 3: PRODUCT RELEASE ==================== -->
+<div id="tab-product" class="tab-content">
+<div class="container">
+
+  <div class="section-header">
+    <div class="section-eyebrow">Workstream</div>
+    <h2>Product Release</h2>
+    <p>How we planned and executed platform releases leading into and during AEP — and what the process felt like for the teams involved.</p>
+  </div>
+
+  <!-- RETRO CARD -->
+  <div class="retro-card">
+    <div class="retro-card-intro">
+      <h4>About this feedback</h4>
+      <p>Feedback comes from the Product Release retro session held December 11, 2025, the post-AEP stakeholder survey, and team survey responses. The full AEP Readiness hub is available in <a href="https://app.notion.com/p/sparkadvisors/AEP-Readiness-2026-2215ab3fc27580b1adc9c85abea18b4a" target="_blank">Notion →</a></p>
+    </div>
+    <div class="retro-sources">
+      <div class="retro-source-pill">
+        <strong>Dec 11 Retro</strong>
+        Product Release workstream session — 47 min
+      </div>
+      <div class="retro-source-pill">
+        <strong>13 Stakeholder Leads</strong>
+        Post-AEP stakeholder survey
+      </div>
+      <div class="retro-source-pill">
+        <strong>34 Team Members</strong>
+        Team retro survey — individual contributors
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT WE DID -->
+  <div class="subsection">
+    <h3>What we did</h3>
+    <p style="font-size:14px; color:#6e6e73; margin-bottom:16px;">The Product Release workstream coordinated all platform features shipped in the run-up to AEP. Jenna and Mo led product strategy and engineering execution, with Jon bridging communication between product, marketing, and internal teams. The season saw one of Spark's most ambitious release schedules — all major features shipped before Oct 15.</p>
+    <div class="did-list">
+      <div class="did-item">
+        <div class="did-icon">🗺️</div>
+        <div class="did-item-body">
+          <strong>AEP Product Strategy &amp; Roadmap</strong>
+          <span>Defined the features and narrative for the AEP season; finalized in July and shared with internal stakeholders</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🔄</div>
+        <div class="did-item-body">
+          <strong>Bi-Weekly Product Release Sync</strong>
+          <span>Standing sync between product, marketing, and program leads to track release timelines and surface blockers</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📅</div>
+        <div class="did-item-body">
+          <strong>Internal Release Roadmap</strong>
+          <span>Shared calendar giving internal teams visibility into what was shipping and when</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📋</div>
+        <div class="did-item-body">
+          <strong>AEP Handoff Deck</strong>
+          <span>Feature summary deck for internal teams covering what each release did, how to talk about it, and what support might encounter</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🎙️</div>
+        <div class="did-item-body">
+          <strong>Internal &amp; External Product Webinars</strong>
+          <span>Internal education sessions for teams before features went live; external agent-facing sessions on key features (AI Assistant deep dive, AEP kickoff)</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📄</div>
+        <div class="did-item-body">
+          <strong>Plan Cheat Sheets</strong>
+          <span>Agent-facing resource summarizing plan options; used as a lead generation tool for the first time, generating 1,000 leads (500 net new)</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🔓</div>
+        <div class="did-item-body">
+          <strong>Feature Ungating</strong>
+          <span>Explored and implemented ungating of select features for non-registered users, enabling new lead generation capability for the first time</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">💬</div>
+        <div class="did-item-body">
+          <strong>#product-releases (Slack)</strong>
+          <span>Channel for communicating release updates and timelines to internal teams throughout the season</span>
+        </div>
+      </div>
+    </div>
+    <div style="background:white; border:1px solid #e5e5ea; border-radius:12px; padding:16px 20px; margin-top:8px;">
+      <p style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#aaa; margin-bottom:10px;">Key features shipped</p>
+      <p style="font-size:13px; color:#3a3a3c; line-height:1.8;">Contact Work Queues &nbsp;·&nbsp; AEP Retention Campaign &nbsp;·&nbsp; Prescription Reconciliation &nbsp;·&nbsp; Auto-Contact Updates &nbsp;·&nbsp; Historical Crosswalks &nbsp;·&nbsp; Plan Exits &amp; Exit Campaigns &nbsp;·&nbsp; Plan Disruption Flagging &nbsp;·&nbsp; Plan Cheat Sheets &nbsp;·&nbsp; AI Assistant &nbsp;·&nbsp; CMS Plan Loads &nbsp;·&nbsp; AP Contracting Page Updates</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- BY THE NUMBERS -->
+  <div class="subsection">
+    <h3>By the numbers</h3>
+    <p style="font-size:13px; color:#6e6e73; margin-bottom:16px;">From 13 stakeholder leads surveyed post-AEP</p>
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-number">3.6<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Product release process effectiveness overall</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Rated platform releases helpful for agents (54% "Very," 46% "Somewhat")</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1,000</div>
+        <div class="stat-label">Leads generated via Plan Cheat Sheets</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">500</div>
+        <div class="stat-label">Net new leads to Spark — a first</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT AGENTS SAID -->
+  <div class="subsection">
+    <h3>What agents said</h3>
+    <p style="font-size:14px; color:#6e6e73; margin-bottom:16px;">From 320 agents surveyed after AEP — rating the Spark platform and key features released for the season.</p>
+    <div class="stats-bar" style="margin-bottom:20px;">
+      <div class="stat-card">
+        <div class="stat-number">4.51<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Overall Spark platform impact — 89% rated 4+</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4.12<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Preparedness for Spark platform features</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">~4.6<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">AEP retention campaign &amp; plan exit alerts effectiveness</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">~3.9<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">AI Assistant effectiveness — more mixed feedback</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="insight-card green">
+        <h4>Platform impact was a standout strength</h4>
+        <p>4.51/5 with 89% rating it 4 or higher — agents overwhelmingly felt the Spark platform made a meaningful difference to their business this AEP. New features like retention campaigns, plan exit alerts, and cheat sheets were consistently well-rated.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Needs assessments and cheat sheets were agent favorites</h4>
+        <p>Agents frequently called out needs assessments as a time saver and cheat sheets as a useful reference tool — direct validation of two of the season's key feature releases.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Sunfire reliability undermined the agent experience</h4>
+        <p>Sunfire was the single most complained-about pain point in the agent survey — inaccurate drug and prescription data, missing plans, unreliable provider lookups, and plans not available for enrollment. This wasn't a Spark release failure, but it significantly affected how agents experienced the season.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>AI Assistant feedback was more mixed</h4>
+        <p>The AI Assistant scored lower (~3.9/5) than other features — suggesting agents found it useful but not yet essential. Likely a function of awareness and adoption rather than capability.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- WHAT WORKED / WHAT DIDN'T -->
+  <div class="subsection">
+    <h3>What worked &amp; what didn't</h3>
+    <div class="two-col">
+      <div class="insight-card green">
+        <h4>Delivered an ambitious roadmap</h4>
+        <p>All major features shipped before Oct 15 — recognized internally as a significant achievement given the scope and team size going into one of Spark's biggest AEPs.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Strategy finalized too late</h4>
+        <p>AEP product strategy wasn't locked until mid-July. The team went from "we have time" to "we don't have time" quickly, compressing everything that followed.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Cross-functional coordination improved</h4>
+        <p>Jon's central role created shared accountability across product, marketing, and comms — teams felt more informed and aligned than in prior years.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Compressed timeline created team strain</h4>
+        <p>The final push was six intense weeks with significant stress across engineering, product, and marketing — compounded by competing priorities like new hires and the LOA platform transition running in parallel.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Plan Cheat Sheets drove measurable lead gen</h4>
+        <p>1,000 leads with 500 net new was a first for Spark — unlocked by feature ungating and a more strategic marketing approach built around the product.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Some releases shipped with bugs</h4>
+        <p>Fixed marketing deadlines meant UAT time was cut to hit dates, resulting in some features going live before they were fully ready.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Product webinars proved effective</h4>
+        <p>The AI Assistant deep dive and AEP kickoff webinar gave agents a level of fidelity that written guides alone couldn't achieve — validating webinars as a product education format.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Release date tension between product and marketing</h4>
+        <p>Marketing needed committed dates early for planning; product couldn't always hold those dates due to CMS timelines and engineering realities. Both sides had legitimate needs with no clean resolution.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Narrative shift landed well</h4>
+        <p>Framing Spark as a tech leader — rather than a feature list — was a genuine step forward. The AI Assistant story gave the team something compelling to rally around.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Releases came too close to AEP for some teams</h4>
+        <p>Teams didn't have enough runway to educate agency principals on new features before AEP started, limiting adoption and creating confusion during the season.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Feature ungating explored for the first time</h4>
+        <p>Looping in the right stakeholders early enough to explore ungating opened up a new growth channel — one that will be built on in future AEPs.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Documentation was scattered</h4>
+        <p>Information lived across multiple redundant docs — handoff decks, release calendars, guides — creating confusion and version control issues across teams.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- KEY QUOTES -->
+  <div class="subsection">
+    <h3>Key quotes</h3>
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <blockquote>What we achieved during AEP this year was incredibly ambitious. Even though it was really hard and things went wrong — we did it.</blockquote>
+        <div class="attribution">JS — Product</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>Some things we were ahead of the curve as best as one could be; while some product releases came out too close to AEP to really allow us to educate agency principals.</blockquote>
+        <div class="attribution">AM — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>There's a lot of opportunity in our product development process so that we're not just shipping and then releasing immediately.</blockquote>
+        <div class="attribution">MR — Product</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>Had we not had fixed dates, it would have made a lot of the marketing work kind of impossible — that was the only way I could allocate time relative to everything else we were on the hook for.</blockquote>
+        <div class="attribution">ET — Marketing</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>We went from "oh we have time" to "oh we don't have time" pretty quickly — because we didn't work on the strategy earlier.</blockquote>
+        <div class="attribution">JM — Program</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>I think there's a question of: can we mentally prepare teams better? Shawn did a great job telling engineering "the next six weeks are going to be challenging" — that kind of framing made a difference.</blockquote>
+        <div class="attribution">JS — Product</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== TAB 4: INTERNAL TRAINING ==================== -->
+<div id="tab-training" class="tab-content">
+<div class="container">
+
+  <div class="section-header">
+    <div class="section-eyebrow">Workstream</div>
+    <h2>Internal Training</h2>
+    <p>How we prepared Spark teams with the knowledge and skills needed for AEP — and where the training landed, and where it fell short.</p>
+  </div>
+
+  <!-- RETRO CARD -->
+  <div class="retro-card">
+    <div class="retro-card-intro">
+      <h4>About this feedback</h4>
+      <p>Feedback comes from the Internal Training retro session held December 9, 2025, the post-AEP stakeholder survey, and team survey responses. The full AEP Readiness hub is available in <a href="https://app.notion.com/p/sparkadvisors/AEP-Readiness-2026-2215ab3fc27580b1adc9c85abea18b4a" target="_blank">Notion →</a></p>
+    </div>
+    <div class="retro-sources">
+      <div class="retro-source-pill">
+        <strong>Dec 9 Retro</strong>
+        Internal Training workstream session — 55 min
+      </div>
+      <div class="retro-source-pill">
+        <strong>13 Stakeholder Leads</strong>
+        Post-AEP stakeholder survey
+      </div>
+      <div class="retro-source-pill">
+        <strong>34 Team Members</strong>
+        Team retro survey — individual contributors
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT WE DID -->
+  <div class="subsection">
+    <h3>What we did</h3>
+    <p style="font-size:14px; color:#6e6e73; margin-bottom:16px;">The Internal Training workstream covered every program built to prepare Spark employees for AEP. Pam led compliance and Medicare training, Asheley led product support enablement, and Britney led Tier 1 readiness. Jon coordinated across teams and ran the all-company kickoff session.</p>
+    <div class="did-list">
+      <div class="did-item">
+        <div class="did-icon">🚀</div>
+        <div class="did-item-body">
+          <strong>AEP All-Hands Kickoff Training (July)</strong>
+          <span>Company-wide session kicking off AEP readiness: what AEP is, why it matters, and what each team can expect during the season</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🙋</div>
+        <div class="did-item-body">
+          <strong>Weekly Office Hours</strong>
+          <span>Open troubleshooting sessions run pre-AEP and through the season; primarily attended by Tier 1 and Product Support but open to all teams</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🎓</div>
+        <div class="did-item-body">
+          <strong>Tier 1 / Product Support Training Program</strong>
+          <span>Multi-session training series including dedicated Sunfire training (4 sessions over 4 weeks) to prepare support teams before volume ramped up</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🛠</div>
+        <div class="did-item-body">
+          <strong>Internal Product Release Training</strong>
+          <span>Dedicated sessions for major feature releases (AI Assistant, AEP Retention Campaign) before they went live for agents</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📊</div>
+        <div class="did-item-body">
+          <strong>Jenna's Product Handoff Deck</strong>
+          <span>Comprehensive 150-page internal resource covering all product releases — widely referenced as a centralized knowledge base. <a href="https://docs.google.com/presentation/d/1xqVZf9rs2ZELNvE7A_hV0HF3bJbnniIl1KYEHQ_A0vU/edit?usp=drive_web&ouid=115631192735331113016" target="_blank" style="color:#0071e3; text-decoration:none; font-weight:500;">View deck →</a></span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🤝</div>
+        <div class="did-item-body">
+          <strong>Ad Hoc Cross-Functional Trainings</strong>
+          <span>Additional sessions with Sales and other teams on specific topics as needs arose throughout the season</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📋</div>
+        <div class="did-item-body">
+          <strong>Notion / Help Center Documentation</strong>
+          <span>Written resources and internal guides published throughout the season for async reference by all teams</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">💬</div>
+        <div class="did-item-body">
+          <strong>Slack Channel Updates</strong>
+          <span>Real-time updates pushed to internal teams via #aep-readiness, #product-releases, and other channels throughout the season</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- BY THE NUMBERS -->
+  <div class="subsection">
+    <h3>By the numbers</h3>
+    <p style="font-size:13px; color:#6e6e73; margin-bottom:16px;">From 13 stakeholder leads surveyed post-AEP</p>
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-number">3.8<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Internal training process effectiveness overall</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">46%</div>
+        <div class="stat-label">Rated internal training initiatives "Very helpful"</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">92%</div>
+        <div class="stat-label">Found Notion / Help Center docs helpful (split equally "Very" and "Somewhat")</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">62%</div>
+        <div class="stat-label">Rated Slack channel updates "Very helpful"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AGENT SERVICES / CX / PRODUCT SUPPORT FEEDBACK -->
+  <div class="subsection">
+    <h3>What Agent Services &amp; CX teams said</h3>
+    <p style="font-size:14px; color:#6e6e73; margin-bottom:16px;">From 12 respondents across Agent Success, CX, and Product Support in the team retro survey. These teams are on the front line with agents during AEP — their training experience directly affects agent outcomes.</p>
+    <div class="stats-bar" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom:20px;">
+      <div class="stat-card">
+        <div class="stat-number">2.0<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Agent Success avg preparedness — lowest of any team</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3.2<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">CX avg preparedness (10 respondents)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">60%</div>
+        <div class="stat-label">CX rated training "Very helpful" — but gaps remained</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="insight-card red">
+        <h4>Sunfire training was a consistent gap</h4>
+        <p>Multiple CX and Product Support respondents called out Sunfire as an area where they felt underprepared. Teams had to learn it live with agents rather than in a practice environment.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Cross-functional shadowing was the top request</h4>
+        <p>Three or more respondents independently asked for the ability to shadow other teams. Seeing how other departments handle their queues and triage was identified as a missing piece of readiness.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Product releases came too close to AEP</h4>
+        <p>CX felt the crunch of new features landing too close to Oct 15. One respondent summed it up bluntly: "RELEASES!!!" — not enough runway to learn before volume ramped up.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Agent comms weren't shared with CX</h4>
+        <p>Marketing emails sent to agents weren't always forwarded to the CX team — leaving them without context when agents called in about those messages.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>New hires felt the gap most</h4>
+        <p>Several respondents were 1–2 months into the job when AEP started. Without enough ramp time, they were learning the platform, the industry, and the season simultaneously.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>For those who engaged, training was valued</h4>
+        <p>6 of 10 CX respondents rated training "Very helpful." The sessions that happened — especially product walkthroughs and office hours — were well-received when teams had time to use them.</p>
+      </div>
+    </div>
+    <div class="quotes-grid" style="margin-top:8px;">
+      <div class="quote-card">
+        <blockquote>More hands-on, scenario-based training — I want to understand releases inside out! Dedicated CX alignment sessions. Shadowing sessions with tenured Spark teams.</blockquote>
+        <div class="attribution">CX — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>Cross-training with shadow sessions! Just seeing someone clear their queue or how their department thought process works would be helpful in triaging.</blockquote>
+        <div class="attribution">CX — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>I didn't feel fully prepared because we didn't have enough trained employees, several new features weren't functioning properly, and Marketing was sending messages to agents that CX didn't learn about until later.</blockquote>
+        <div class="attribution">Product Support — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>Much more training internally and externally — especially around industry, compliance, and carrier behavior.</blockquote>
+        <div class="attribution">Agent Success — Team</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- WHAT WORKED / WHAT DIDN'T -->
+  <div class="subsection">
+    <h3>What worked &amp; what didn't</h3>
+    <div class="two-col">
+      <div class="insight-card green">
+        <h4>T1 and Product Support training was effective</h4>
+        <p>Teams that received targeted training came out of AEP noticeably more confident — reduced cross-functional questions and faster issue resolution showed up across the feedback.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>AM training was a clear gap</h4>
+        <p>Account Managers felt unprepared for agent questions — particularly around contracting and Sunfire. AM was the only team to rate training effectiveness at 1/5.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Weekly office hours were highly valuable pre-AEP</h4>
+        <p>The troubleshooting format worked especially well in the weeks before and at the start of AEP — when volume was manageable and questions were fresh.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Training was reactive, not proactive</h4>
+        <p>Content was built to solve immediate problems as they surfaced — not from a structured, phased curriculum built well in advance of the season.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Internal product release training landed well</h4>
+        <p>Sessions on the AI Assistant and AEP Retention Campaign before they went live gave T1 and Product Support the context they needed to support agents effectively.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Resources were scattered</h4>
+        <p>Critical information lived across Slack threads, Notion pages, and individual docs — managers had to build their own ad hoc reference hubs to fill the gaps.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Asking teams what they wanted to learn was a positive step</h4>
+        <p>Soliciting team input before building the training program helped sessions address real gaps, not just assumed ones — a practice worth scaling next year.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>No sandbox environment for Tier 1 / Product Support</h4>
+        <p>Teams had to learn Spark and Sunfire navigation live with agents — no practice environment existed to build confidence before calls started coming in.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>New hires understood AEP's importance</h4>
+        <p>The all-hands kickoff and onboarding training successfully brought new employees up to speed on what AEP meant for their role — called out as a genuine win.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Training timing was often misaligned</h4>
+        <p>When training happened too far in advance of when teams needed the knowledge, retention suffered — particularly for new hires still ramping up.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>AEP calendar provided training visibility</h4>
+        <p>Teams knew when sessions were happening, which improved attendance and allowed managers to plan their team's preparation schedule.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Cross-functional training was minimal</h4>
+        <p>Teams largely trained in silos. Requests for shadowing and cross-team learning were common in the feedback but weren't built into the program.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- KEY QUOTES -->
+  <div class="subsection">
+    <h3>Key quotes</h3>
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <blockquote>The weekly troubleshooting sessions were definitely helpful early on, especially pre-AEP. It just got so busy that we weren't able to use it as impactfully as we wanted to.</blockquote>
+        <div class="attribution">AG — Agent Services</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>I find that people may think "this is a Sunfire issue" — when really, understanding how Medicare works would have solved that problem.</blockquote>
+        <div class="attribution">AG — Agent Services</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>The teams we emphasized training for — T1 and Product Support — you could really see the difference. We just didn't do as much for AMs.</blockquote>
+        <div class="attribution">JM — Program</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>We need to start training earlier. It's truly possible we should start planning for the following AEP right after the previous one ends.</blockquote>
+        <div class="attribution">AZ — Stakeholder</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>Cross-functional training was a common theme in the feedback. People wanted to shadow other teams and get more of a sense of what others are doing.</blockquote>
+        <div class="attribution">JM — Program</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>Late hiring impacted our ability to train effectively. We were onboarding and preparing people at the same time, which made everything harder.</blockquote>
+        <div class="attribution">AG — Agent Services</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== TAB 5: COMPLIANCE ==================== -->
+<div id="tab-compliance" class="tab-content">
+<div class="container">
+  <div class="section-header">
+    <div class="section-eyebrow">Workstream</div>
+    <h2>Compliance</h2>
+    <p>How Spark managed agent compliance monitoring during AEP — built reactively, in-season, with no dedicated pre-AEP workstream.</p>
+  </div>
+
+  <!-- RETRO CARD -->
+  <div class="retro-card">
+    <div class="retro-card-intro">
+      <h4>About this feedback</h4>
+      <p>Compliance was not a formal AEP Readiness workstream. The primary record is the <strong>#aep-telephonic-compliance-2026</strong> Slack channel, created October 15 — the first day of AEP. Supplemented by the post-AEP stakeholder survey and team retro survey (Pam Harrison, n=1).</p>
+    </div>
+    <div class="retro-sources">
+      <div class="retro-source-pill">
+        <strong>#aep-telephonic-compliance-2026</strong>
+        Primary activity log — created Day 1 of AEP
+      </div>
+      <div class="retro-source-pill">
+        <strong>1 Team Member</strong>
+        Pam Harrison — team retro survey
+      </div>
+      <div class="retro-source-pill">
+        <strong>13 Stakeholder Leads</strong>
+        Post-AEP stakeholder survey
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT WE DID -->
+  <div class="subsection">
+    <h3>What we did</h3>
+    <p style="font-size:14px; color:#6e6e73; margin-bottom:16px;">Compliance monitoring was stood up reactively at the start of AEP. Pam Harrison and the compliance team led agency oversight, while cross-functional partners built data tools in real time to surface enrollment behavior concerns.</p>
+    <div class="did-list">
+      <div class="did-item">
+        <div class="did-icon">📊</div>
+        <div class="did-item-body">
+          <strong>Enrollment Behavior Monitoring Tool (Brian Wu, Oct 24)</strong>
+          <span>Brian Wu added a "Telephonic Compliance" tab to the AEP Internal Dashboard — visualizing Sunfire enrollment submissions by time of day to detect clustering patterns. Flagged suspicious agent activity in the first week of AEP and gave the compliance team a data-driven lens on enrollment behavior throughout the season.</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📋</div>
+        <div class="did-item-body">
+          <strong>Weekly Agency Compliance Check-ins</strong>
+          <span>Regular check-in cadence with agency principals throughout AEP to monitor compliance posture, surface concerns early, and document action items — the backbone of in-season compliance oversight</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">⚠️</div>
+        <div class="did-item-body">
+          <strong>Devoted Agency Suspension Management</strong>
+          <span>Managed Devoted Health suspension events for multiple agency partners — Vitality, Serenicare (HyperHealth), Phalanx, and East West — coordinating with carriers and affected agents through suspension and reinstatement</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📉</div>
+        <div class="did-item-body">
+          <strong>C-SNP+ Misfit Dashboard (Nick Culver)</strong>
+          <span>Built and maintained a misfit monitoring dashboard for Devoted C-SNP+ enrollment — tracking plan-member alignment to surface potential inappropriate enrollment patterns at the carrier level</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">✅</div>
+        <div class="did-item-body">
+          <strong>HRA Completion Tracking Dashboard (Jon, Nov 10)</strong>
+          <span>Developed an HRA completion rate dashboard to track health risk assessment submission across agencies — a key compliance and plan quality metric for carriers</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🔍</div>
+        <div class="did-item-body">
+          <strong>Per-Agency Compliance Health Sheets</strong>
+          <span>Individual tracking sheets for agency-level compliance metrics — giving the team a structured view into each agency's posture and any active issues throughout the season</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🛠</div>
+        <div class="did-item-body">
+          <strong>Agent Correction Initiative</strong>
+          <span>A structured process for addressing individual agent compliance concerns — triaging flagged agents, initiating correction plans, and documenting outcomes throughout the season</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🤖</div>
+        <div class="did-item-body">
+          <strong>Enhanced Agent Monitoring MVP (Alex Zhang, Dec 1)</strong>
+          <span>Alex shipped an enhanced monitoring MVP in December — a more scalable, data-driven layer of agent behavior oversight built as a direct output of what the team learned during AEP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- BY THE NUMBERS -->
+  <div class="subsection">
+    <h3>By the numbers</h3>
+    <p style="font-size:13px; color:#6e6e73; margin-bottom:16px;">From 13 stakeholder leads surveyed post-AEP on agent compliance monitoring preparedness</p>
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-number">38%</div>
+        <div class="stat-label">of stakeholders rated agent compliance monitoring "Not prepared"</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">38%</div>
+        <div class="stat-label">rated it "Somewhat prepared" — only 1 of 13 said "Very prepared"</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Pam Harrison's self-reported preparedness score — team survey (n=1)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">Day 1</div>
+        <div class="stat-label">When #aep-telephonic-compliance-2026 was created — the first day of AEP</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- WHAT WORKED / DIDN'T -->
+  <div class="subsection">
+    <h3>What worked &amp; what didn't</h3>
+    <div class="two-col">
+      <div class="insight-card green">
+        <h4>Brian Wu's enrollment tool caught real issues</h4>
+        <p>The time-of-day clustering visualization surfaced suspicious agent enrollment patterns in the first week of AEP — demonstrating the value of data-driven compliance monitoring and giving the team actionable intelligence they didn't have before.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Compliance was not a planned workstream</h4>
+        <p>There was no compliance readiness work done before AEP. The channel, tools, and monitoring infrastructure were all stood up reactively on or after October 15 — the team was building the plane while flying it.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Devoted suspension workflow was handled effectively</h4>
+        <p>When Devoted suspensions hit multiple agencies simultaneously, the team managed through it — coordinating with carriers, keeping agents informed, and tracking reinstatement status under high-stakes, time-sensitive conditions.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>No compliance playbook or framework going in</h4>
+        <p>Without a pre-built escalation path, monitoring protocol, or documented response workflow, every compliance situation had to be worked out as it arose. The team effectively had to establish norms mid-season.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Cross-functional data partners stepped up</h4>
+        <p>Brian Wu, Nick Culver, and Alex Zhang built monitoring tools the compliance team didn't have capacity to build themselves. This cross-functional response was a genuine strength — though it relied on ad hoc coordination rather than a system.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Stakeholder preparedness was low across the board</h4>
+        <p>77% of stakeholder survey respondents (10 of 13) rated agent compliance monitoring as "Not prepared" or "Somewhat prepared." This was among the lowest preparedness scores of any area surveyed.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Agent Correction Initiative created a resolution path</h4>
+        <p>Having a defined (if informal) process for flagged agents gave the team a structured way to close the loop on compliance concerns rather than leaving them unresolved at season end.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>IX monitoring infrastructure wasn't ready</h4>
+        <p>IntelligenceX, Spark's call monitoring system, was not mature enough to serve as a compliance backbone during AEP — leaving the team reliant on Sunfire data and manual agency oversight instead of automated call-level insights.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- KEY QUOTES -->
+  <div class="subsection">
+    <h3>Key quotes</h3>
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <blockquote>We stood up everything around compliance during AEP itself — the channel launched on day one. There was no prior workstream for this.</blockquote>
+        <div class="attribution">JM — Program</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>The enrollment time-of-day clustering tool caught patterns we would have missed otherwise. It gave us an early signal we could actually act on.</blockquote>
+        <div class="attribution">AEP Internal Dashboard — Telephonic Compliance Tab</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>Most stakeholders didn't feel prepared to monitor agent compliance — which is a hard gap to close mid-season. It needs to be a pre-AEP program next year.</blockquote>
+        <div class="attribution">JM — Program</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>The team handled what came up — Devoted suspensions, flagged agents, misfit concerns — but the absence of a playbook meant every situation started from scratch.</blockquote>
+        <div class="attribution">JM — Program</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== TAB 6: AGENT SERVICES ==================== -->
+<div id="tab-agent-services" class="tab-content">
+<div class="container">
+  <div class="section-header">
+    <div class="section-eyebrow">Team</div>
+    <h2>Agent Services</h2>
+    <p>How Spark's CX and Product Support teams experienced AEP — what they were prepared for, where they struggled, and what they need in 2027.</p>
+  </div>
+
+  <!-- RETRO CARD -->
+  <div class="retro-card">
+    <div class="retro-card-intro">
+      <h4>About this feedback</h4>
+      <p>No dedicated Agent Services retro session was held. Feedback comes from the post-AEP stakeholder survey, the team retro survey (11 CX and Product Support respondents), and the agent retro survey (n=320).</p>
+    </div>
+    <div class="retro-sources">
+      <div class="retro-source-pill">
+        <strong>11 Team Members</strong>
+        CX + Product Support — team retro survey
+      </div>
+      <div class="retro-source-pill">
+        <strong>4 Stakeholder Leads</strong>
+        Post-AEP stakeholder survey
+      </div>
+      <div class="retro-source-pill">
+        <strong>320 Agents</strong>
+        Agent retro survey
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT THIS FEEDBACK COVERS -->
+  <div class="subsection">
+    <h3>What this feedback covers</h3>
+    <p style="font-size:14px; color:#6e6e73; margin-bottom:16px;">The feedback on this page reflects the team's experience with the following programs and tools during AEP 2025.</p>
+    <div class="did-list">
+      <div class="did-item">
+        <div class="did-icon">🎓</div>
+        <div class="did-item-body">
+          <strong>T1 / CX Training Program</strong>
+          <span>Multi-session Sunfire training (4 sessions over 4 weeks) plus general platform training delivered pre-AEP</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🙋</div>
+        <div class="did-item-body">
+          <strong>Weekly Office Hours</strong>
+          <span>Open troubleshooting sessions run pre-AEP and into the season, primarily attended by T1 and Product Support</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🚀</div>
+        <div class="did-item-body">
+          <strong>AEP All-Hands Kickoff (July)</strong>
+          <span>Company-wide session covering what AEP is, what to expect, and what each team's role looks like during the season</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🛠</div>
+        <div class="did-item-body">
+          <strong>Internal Product Release Training</strong>
+          <span>Dedicated sessions before major launches — AI Assistant and AEP Retention Campaign — giving the team context before agents started asking</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📖</div>
+        <div class="did-item-body">
+          <strong>Jenna's Product Handoff Deck</strong>
+          <span>150-page centralized resource covering all product releases — widely referenced by the team as a single source of truth for what shipped and when</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📋</div>
+        <div class="did-item-body">
+          <strong>Notion / Help Center</strong>
+          <span>Carrier knowledge, process guides, and reference docs used by the team in-season for quick answers on contracting, Sunfire support, and more</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📅</div>
+        <div class="did-item-body">
+          <strong>AEP Readiness Calendar</strong>
+          <span>Shared calendar surfacing training sessions, release dates, and key deadlines to help the team plan and stay aligned</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🎫</div>
+        <div class="did-item-body">
+          <strong>Intercom Ticketing System</strong>
+          <span>Transitioned to as the primary support and ticketing platform — new for this AEP, introduced during a high-volume period</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📍</div>
+        <div class="did-item-body">
+          <strong>AEP States Escalation Channel</strong>
+          <span>Stood up mid-season to centralize the spike in state appointment and RTS requests coming in from multiple teams simultaneously</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📄</div>
+        <div class="did-item-body">
+          <strong>Master Product Release Document</strong>
+          <span>A consolidated summary of every release produced during AEP — used as a real-time reference across Agent Services and key stakeholders</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PREPAREDNESS SNAPSHOT -->
+  <div class="subsection">
+    <h3>Preparedness snapshot</h3>
+    <p style="font-size:13px; color:#6e6e73; margin-bottom:16px;">From 11 CX and Product Support respondents in the team retro survey</p>
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-number">3.4<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Avg team preparedness score — CX + Product Support (n=11)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">55%</div>
+        <div class="stat-label">Said "right on time" — 6 of 11; 3 said behind, 2 said ahead</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Avg stakeholder preparedness — Agent Success leads (n=4)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4.8<span style="font-size:16px;color:#aaa">/5</span></div>
+        <div class="stat-label">Avg confidence for 2027 — highest of any team in the survey</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- KEY THEMES -->
+  <div class="subsection">
+    <h3>Key themes</h3>
+    <div class="two-col">
+      <div class="insight-card green">
+        <h4>Sunfire training session delivered real value</h4>
+        <p>The dedicated T1 Sunfire training sessions were called out as a genuine win — teams that attended came into AEP meaningfully more prepared to handle the platform issues that make up the majority of inbound contacts.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Sunfire troubleshooting still left gaps in real-time</h4>
+        <p>Despite the sessions, many team members — especially newer hires — still felt underprepared when Sunfire issues surfaced live with agents. The training gave a foundation but not enough hands-on practice in real-time scenarios.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>AEP Retention Campaign was a standout</h4>
+        <p>Product launch handling earlier in AEP was a highlight: collaborative sessions, thorough training, and a consolidated master release document helped the team stay aligned. 2,034 agents opted in; 53k needs assessments completed.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>A significant portion of the team was still ramping</h4>
+        <p>Multiple respondents were 1–3 months into their role when AEP started. Learning the platform, the industry, and a high-volume season simultaneously compressed an already-tight readiness window for a meaningful share of the team.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Notion was a practical carrier knowledge resource</h4>
+        <p>The Notion carrier reference pages — Sunfire carrier support, contracting workflows, RTS processes — were cited as genuinely useful in-season tools that helped the team quickly find answers without needing to escalate.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Marketing comms weren't shared with the CX team</h4>
+        <p>Emails sent to agents about carrier updates, product changes, and campaigns weren't being forwarded to CX — leaving support teams without context when agents called in about messages they'd received. A recurring, easily fixable gap.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Product Support ↔ CX escalation model worked</h4>
+        <p>The defined handoff between T1/CX and Product Support helped triage volume effectively — CX handled first-contact resolution while Product Support owned complex platform, integration, and feature issues.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>RTS and state appointments crowded out core work</h4>
+        <p>The volume of RTS status issues and state appointment requests was significantly higher than forecasted. It became a dominant queue driver throughout AEP — consuming capacity that should have been available for platform support.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- AGENT PERSPECTIVE -->
+  <div class="subsection">
+    <h3>From the agent survey</h3>
+    <p style="font-size:13px; color:#6e6e73; margin-bottom:16px;">From 320 agents surveyed post-AEP — direct signal on the team's outputs</p>
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-number">89%</div>
+        <div class="stat-label">of agents rated the Spark platform 4 or 5 out of 5 for business impact</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">24%</div>
+        <div class="stat-label">of agents used the in-platform support chat — 76 of 320 respondents</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">79%</div>
+        <div class="stat-label">of support chat users rated it 4 or 5 — satisfied or very satisfied</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">77%</div>
+        <div class="stat-label">of agents rated Spark's training resources "effective" (4 or 5 out of 5)</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FOR 2027 -->
+  <div class="subsection">
+    <h3>For 2027</h3>
+    <p style="font-size:14px; color:#6e6e73; margin-bottom:16px;">Top asks from CX and Product Support team members in the survey</p>
+    <div class="two-col">
+      <div class="insight-card">
+        <h4>Productized onboarding checklist + LMS</h4>
+        <p>A structured, searchable training library (Docebo) with a clear onboarding checklist — so new team members have a defined path rather than piecing together context from Slack and Notion.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Hands-on, scenario-based Sunfire training</h4>
+        <p>Move beyond overview sessions to live troubleshooting practice — real agent scenarios, common failure modes, and in-platform navigation — before volume ramps up.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Cross-functional shadowing</h4>
+        <p>Multiple respondents independently asked for the ability to observe how other teams handle their queues. Seeing how Contracting, AM, or Product Support operate helps CX triage and route more effectively.</p>
+      </div>
+      <div class="insight-card">
+        <h4>RTS readiness earlier in the cycle</h4>
+        <p>Start agent RTS prep as early as possible — reducing the in-season volume of state appointment requests that consumed disproportionate team capacity throughout AEP.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Features stabilized before AEP launch</h4>
+        <p>New features shipping with known bugs during AEP created immediate support burden. A cleaner product blackout window — with features fully QA'd before Oct 15 — would directly reduce reactive support volume.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Marketing comms forwarded to CX in real time</h4>
+        <p>A simple, consistent process for sharing outbound agent communications with the CX team — so support has context before agents start calling in about what they received.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- KEY QUOTES -->
+  <div class="subsection">
+    <h3>Key quotes</h3>
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <blockquote>One of the biggest successes was how we handled product launches earlier in AEP — collaborative sessions, thorough training, and one big master document summarizing every release.</blockquote>
+        <div class="attribution">CX — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>I didn't feel fully prepared because we didn't have enough trained employees, several new features weren't functioning properly, and Marketing was sending messages to agents that CX didn't learn about until later.</blockquote>
+        <div class="attribution">Product Support — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>T1 getting a meeting on Sunfire definitely helped — most of our contacts are Sunfire issues. I can see the improvement year over year, and I think we are tracking on a great path.</blockquote>
+        <div class="attribution">CX — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>So many sudden fires to put out with Sunfire, the gov shutdown, new practices and processes, and so many new agents — we were ready to juggle and solve, but the volume was more than we were prepared for.</blockquote>
+        <div class="attribution">CX — Team</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== TAB 7: CONTRACTING ==================== -->
+<div id="tab-contracting" class="tab-content">
+<div class="container">
+  <div class="section-header">
+    <div class="section-eyebrow">Team</div>
+    <h2>Contracting</h2>
+    <p>Agent-facing contracting experience during AEP 2025, with operational context from the Contracting team.</p>
+  </div>
+
+  <!-- DATA GAP CALLOUT -->
+  <div style="background:#fffbeb; border:1.5px solid #f0c040; border-radius:12px; padding:20px 24px; margin-bottom:32px; display:flex; gap:16px; align-items:flex-start;">
+    <div style="font-size:20px; line-height:1; flex-shrink:0;">⚠️</div>
+    <div>
+      <p style="font-size:13px; font-weight:700; color:#92620a; margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px;">Missing data — limited team retro coverage</p>
+      <p style="font-size:13px; color:#78510a; line-height:1.6;">The Contracting team had only 2 respondents on the internal team survey (Marielle and Allison) and was not directly embedded in the AEP readiness workstream planning cycle. This tab relies primarily on the <strong>agent survey (n=320)</strong> for quantitative data, supplemented by qualitative context from those two respondents. A fuller team retrospective is recommended for 2027 planning.</p>
+    </div>
+  </div>
+
+  <!-- RETRO CARD -->
+  <div class="retro-card">
+    <div class="retro-card-label">Sources for this tab</div>
+    <div class="retro-chips">
+      <span class="retro-chip">Agent Retro Survey — n=320</span>
+      <span class="retro-chip">Team Survey — n=2 (Contracting)</span>
+      <span class="retro-chip">Qualitative notes — Marielle &amp; Allison</span>
+    </div>
+  </div>
+
+  <!-- PREPAREDNESS SNAPSHOT -->
+  <div class="section-block">
+    <h3 class="section-block-title">Agent perspective on contracting</h3>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-number">77%</div>
+        <div class="stat-label">Prepared or better for Contracting / RTS</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4.18<span style="font-size:16px; font-weight:400;">/5</span></div>
+        <div class="stat-label">Avg contracting &amp; RTS preparedness rating</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">72%</div>
+        <div class="stat-label">Rated carrier contracts platform feature effective or better</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">68%</div>
+        <div class="stat-label">Satisfied or better with contracting support from upline</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY THEMES -->
+  <div class="section-block">
+    <h3 class="section-block-title">Key themes</h3>
+    <div class="insight-grid">
+      <div class="insight-card green">
+        <h4>Most agents felt prepared for contracting &amp; RTS</h4>
+        <p>77% of agents rated themselves prepared or better for Contracting/RTS heading into AEP — the strongest preparedness score of any topic in the agent survey. Agents who engaged early with carrier certification timelines generally arrived RTS without incident.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Deadlines, transfers, and blackouts were well-managed</h4>
+        <p>The Contracting team specifically identified deadline tracking, transfer processing, and carrier blackout navigation as areas they felt well-prepared for. Pre-AEP Anthem outreach and structured carrier deadline communications helped agents move through transfer windows before cutoffs.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>RTS lag was a persistent friction point</h4>
+        <p>Multiple agents reported that carrier portals were showing RTS status before Spark reflected it — creating confusion at the start of AEP. The disconnect between carrier-confirmed RTS and the Spark platform's RTS display generated support volume and frustrated agents trying to quote and enroll.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>RTS reporting and add-state processes were a moving target</h4>
+        <p>The Contracting team flagged this as their primary gap: "all things having to do with the moving target that is ready to sell reporting from carriers and add state processes." This was echoed by ACS and Product stakeholders, who noted last-minute discoveries around SNP certs, state licensing requirements, and add-state workflows that weren't surfaced until right before or during AEP.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Humana blackout had real sales impact</h4>
+        <p>Agents who weren't contracted with Humana before the blackout window lost significant opportunities — one agent cited approximately 30 lost sales. New agents entering AEP without all key carriers contracted was a recurring complaint, pointing to a gap in proactive pre-AEP contracting outreach.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Contracting UI change frustrated agents mid-prep</h4>
+        <p>A platform update to the carrier contracting page was called out unprompted across multiple agent responses: agents found it harder to use than in 2024 and 2025, and could no longer click directly into a carrier to request a contract. The change landed close enough to AEP to create friction at a critical moment.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Proactive transfer deadline reminders were insufficient</h4>
+        <p>Marielle self-identified this gap directly: "I could have done a better job with deadline prep and reminders for agents in advance — especially for transfers with a release." Agents with pending transfer forms approaching blackout windows didn't always receive timely reminders, resulting in missed deadlines.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOR 2027 -->
+  <div class="section-block">
+    <h3 class="section-block-title">For 2027</h3>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <h4>Start contracting outreach in June</h4>
+        <p>Both the Contracting team and agents recommended starting earlier — at or before the time AHIP/carrier certs begin. Early outreach prevents the bottleneck of agents entering AEP without all contracts in place.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Structured transfer deadline reminder cadence</h4>
+        <p>Build and own a proactive reminder schedule for contract deadlines, especially transfers with a release. Agents and uplines need targeted prompts well before blackout windows close — not just general deadline communications.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Proactive hierarchy audit before AEP</h4>
+        <p>Run a hierarchy and level audit earlier in the cycle to catch misalignments before they create contracting delays during the season. Flag stragglers by carrier and escalate to uplines proactively.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Get uplines involved earlier and more explicitly</h4>
+        <p>Uplines need clearer asks and earlier involvement in pushing their downlines across the contracting finish line. Agents who arrive at AEP without key carriers are often there because their upline wasn't engaged soon enough.</p>
+      </div>
+      <div class="insight-card">
+        <h4>No major contracting platform changes in Q4</h4>
+        <p>Allison's explicit 2027 ask: no major internal or external system changes in the last quarter heading into deadline season. Changes to the contracting UI or workflows mid-prep create avoidable support volume at the worst possible time.</p>
+      </div>
+      <div class="insight-card">
+        <h4>"Ready to Sell: what to expect" agent guide</h4>
+        <p>Allison flagged this as a missing topic: agents needed clearer guidance on what the RTS process actually looks like — timelines, what triggers it, and how to troubleshoot lag between carrier confirmation and Spark reflection.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY QUOTES -->
+  <div class="section-block">
+    <h3 class="section-block-title">In their own words</h3>
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <blockquote>Carrier contracts caused a lot of problems, specifically with Humana. I probably had 30 sales that I couldn't get because I didn't have Humana.</blockquote>
+        <div class="attribution">Agent — Survey</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>Our contracts did not all move over in time for AEP, despite Spark guidance and follow-up. This caused issues for quote comparisons.</blockquote>
+        <div class="attribution">Agent — Survey</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>RTS's need to happen more quickly — I am showing RTS in some carrier websites but not in Spark.</blockquote>
+        <div class="attribution">Agent — Survey</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>Better and more timely support with contracting issues prior to AEP.</blockquote>
+        <div class="attribution">Agent — Survey</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== TAB 8: ACCOUNT MANAGEMENT ==================== -->
+<div id="tab-account-mgmt" class="tab-content">
+<div class="container">
+
+  <div class="section-header">
+    <div class="section-eyebrow">Team</div>
+    <h2>Account Management & Sales</h2>
+    <p>How AM and Sales teams experienced AEP 2025 — and what they observed from the agency principals and agents they support.</p>
+  </div>
+
+  <!-- RETRO CARD -->
+  <div class="retro-card">
+    <div class="retro-card-label">Sources for this tab</div>
+    <div class="retro-chips">
+      <span class="retro-chip">Team Survey — Account Management n=10</span>
+      <span class="retro-chip">Team Survey — Sales n=4</span>
+      <span class="retro-chip">Agent Survey — Upline satisfaction n=320</span>
+    </div>
+  </div>
+
+  <!-- WHAT THIS FEEDBACK COVERS -->
+  <div class="section-block">
+    <h3 class="section-block-title">What this feedback covers</h3>
+    <div class="did-grid">
+      <div class="did-item">
+        <div class="did-icon">📅</div>
+        <div class="did-item-body">
+          <strong>AEP Readiness Google Calendar</strong>
+          <span>Primary planning and awareness tool for tracking key dates, webinars, and carrier deadlines — rated helpful by nearly all AM and Sales respondents</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📰</div>
+        <div class="did-item-body">
+          <strong>Weekly Agent Newsletter (AEP Rundown)</strong>
+          <span>Agent-facing weekly communications that AM and Sales used to stay current on what was being sent to agents, upcoming webinars, and platform timelines</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🎓</div>
+        <div class="did-item-body">
+          <strong>Internal Training Initiatives</strong>
+          <span>Platform feature training (Retention Campaign, AI Assistant), the AEP Handoff Doc, and cross-functional syncs used to prepare AM and Sales for agent-facing conversations</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📋</div>
+        <div class="did-item-body">
+          <strong>Notion / Help Center Documentation</strong>
+          <span>Carrier knowledge base, process guides, and reference documentation used in-season by both AM and Sales to quickly answer agent and AP questions</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🔄</div>
+        <div class="did-item-body">
+          <strong>Cross-Functional Syncs</strong>
+          <span>AEP Readiness Syncs, Product Release Syncs, and ad hoc coordination sessions that AM and Sales used to stay aligned across teams during the season</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🏢</div>
+        <div class="did-item-body">
+          <strong>Agency Onboarding & Contracting Readiness Support</strong>
+          <span>AM team's role in supporting agency principals and their downlines through contracting, RTS readiness, and platform onboarding ahead of AEP — a major gap area this cycle</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">🚀</div>
+        <div class="did-item-body">
+          <strong>Platform Product Release Education</strong>
+          <span>AM and Sales were responsible for educating agency principals on new platform features — Retention Campaign, AI Assistant, plan change tools — released in the lead-up to AEP</span>
+        </div>
+      </div>
+      <div class="did-item">
+        <div class="did-icon">📞</div>
+        <div class="did-item-body">
+          <strong>Telephonic / Call Center Agency Support</strong>
+          <span>New agency type onboarded this cycle — call center agencies had distinct operational needs (Sunfire Blaze, esignature vs. voice signature, plan suppressions) that required separate preparation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREPAREDNESS SNAPSHOT -->
+  <div class="section-block">
+    <h3 class="section-block-title">Preparedness snapshot</h3>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-number">3.29<span style="font-size:16px;font-weight:400;">/5</span></div>
+        <div class="stat-label">AM + Sales avg prep score (n=14)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4.43<span style="font-size:16px;font-weight:400;">/5</span></div>
+        <div class="stat-label">Avg confidence for AEP 2027</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">11/14</div>
+        <div class="stat-label">Said Spark was "right on time" or better</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10/14</div>
+        <div class="stat-label">Said agents were "very prepared" for Spark platform features — strongest rating of any topic</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY THEMES -->
+  <div class="section-block">
+    <h3 class="section-block-title">Key themes</h3>
+    <div class="insight-grid">
+      <div class="insight-card green">
+        <h4>Platform features landed well with agencies</h4>
+        <p>10 of 14 AM and Sales respondents said agents were "very prepared" for Spark's AEP platform features — the strongest positive rating across all topics. The Retention Campaign, AI Assistant, and AEP Handoff Doc were specifically called out as valuable. Webinar training and direct feature walk-throughs gave AM teams confidence going into agency conversations.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>Notion, the calendar, and the newsletter were the backbone of AM prep</h4>
+        <p>Notion was rated "very helpful" by 9 of 14 respondents — near-universal. The AEP Readiness Calendar and weekly agent newsletter were similarly well-used, helping AM and Sales track what was being communicated to agents, plan around key dates, and carve out prep time. Cross-functional syncs were valuable for those who participated.</p>
+      </div>
+      <div class="insight-card green">
+        <h4>AM teams were well-equipped to manage chaos</h4>
+        <p>Despite a difficult external environment — unprecedented carrier disruptions, CMS uncertainty, and a high volume of last-minute issues — 11 of 14 rated Spark's internal preparedness as "right on time." Sales in particular noted the team did well given the circumstances, rating their own confidence for 2027 at a perfect 5.0/5.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Contracting and RTS visibility was the dominant gap</h4>
+        <p>Cited by 9+ of 14 respondents — the single most named failure point across both teams. AMs had no direct visibility into agency contracting status, leading to reactive fire-fighting rather than proactive support. Agents realized mid-AEP they weren't RTS. Release processing delays left some agents waiting 90 days despite having a formal release. "Contracting issues and delays set many partners behind." (AM — Team)</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Sunfire training for AM never happened</h4>
+        <p>The most explicitly named single training gap: "I wanted my team trained on supporting Sunfire and that training never happened." Multiple AM respondents felt unprepared for Sunfire troubleshooting, with answers slow to surface early in AEP. Sales echoed this — agents and APs directed Sunfire questions to their first point of contact, but AM didn't have what they needed to answer them.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Information was scattered with no single source of truth</h4>
+        <p>AEP updates came through multiple Slack channels, making it hard to know what was current. One AM built their own reference doc just to keep up. Sales reps on the road found Slack inaccessible and felt like the "last to know" despite being first contact for brokers. Lots of Slack discussion without clear ownership or decisiveness in what to communicate to APs.</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Call center agencies required a different playbook — one that didn't exist</h4>
+        <p>New telephonic agency partners came to AEP with different operational needs: Sunfire Blaze, esignature vs. voice signature workflows, plan suppression handling. These differences weren't anticipated and created avoidable confusion. "There was a disconnect between the tools these partners thought they were getting and what we offered — that should have been caught earlier." (AM — Team)</p>
+      </div>
+      <div class="insight-card red">
+        <h4>Product releases landed too late for agency education</h4>
+        <p>Multiple AM and Sales respondents noted that new platform features arrived too close to AEP to give agencies meaningful time to learn them. AMs were left explaining tools they had just seen themselves. "Some of those changes just happened and we were left holding the bag figuring out what happened." (Sales — Team)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- AGENT PERSPECTIVE — UPLINE SATISFACTION -->
+  <div class="section-block">
+    <h3 class="section-block-title">Agent perspective — how they rated their upline support</h3>
+    <p style="font-size:13px; color:#6e6e73; margin-bottom:20px;">From the agent survey (n=320). Uplines include agency principals and, by extension, AM and Sales teams who support them.</p>
+    <div class="stat-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="stat-card">
+        <div class="stat-number">4.51<span style="font-size:16px;font-weight:400;">/5</span></div>
+        <div class="stat-label">Overall upline satisfaction</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">67%</div>
+        <div class="stat-label">Satisfied+ with communication & responsiveness</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">66%</div>
+        <div class="stat-label">Satisfied+ with training & professional development</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">57%</div>
+        <div class="stat-label">Satisfied+ with client support</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">55%</div>
+        <div class="stat-label">Satisfied+ with on-time commission payments</div>
+      </div>
+      <div class="stat-card" style="border: 1.5px solid #ffd0d0;">
+        <div class="stat-number" style="color:#ff3b30;">52%</div>
+        <div class="stat-label">Satisfied+ with marketing & lead gen support — lowest rated area</div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;">
+      <p style="font-size:13px; font-weight:600; color:#3a3a3c; margin-bottom:12px;">Top challenges agents report facing (from agent survey, n=320):</p>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        <span style="background:#f5f5f7; border-radius:20px; padding:6px 14px; font-size:13px; color:#3a3a3c;">Rising premiums / plan exits / benefit disruptions — 64%</span>
+        <span style="background:#f5f5f7; border-radius:20px; padding:6px 14px; font-size:13px; color:#3a3a3c;">Changing commissions — 34%</span>
+        <span style="background:#f5f5f7; border-radius:20px; padding:6px 14px; font-size:13px; color:#3a3a3c;">Lack of a business strategy — 26%</span>
+        <span style="background:#f5f5f7; border-radius:20px; padding:6px 14px; font-size:13px; color:#3a3a3c;">Unexpected client churn — 24%</span>
+        <span style="background:#f5f5f7; border-radius:20px; padding:6px 14px; font-size:13px; color:#3a3a3c;">Helping clients cover benefits gaps — 22%</span>
+        <span style="background:#f5f5f7; border-radius:20px; padding:6px 14px; font-size:13px; color:#3a3a3c;">Lack of technology / inefficient workflows — 21%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOR 2027 -->
+  <div class="section-block">
+    <h3 class="section-block-title">For 2027</h3>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <h4>Pre-AEP contracting readiness audit by agency</h4>
+        <p>Run a proactive audit before AEP identifying which agents in each agency's downline aren't yet RTS. Share that list with APs and do personalized outreach to stragglers — don't wait for agents to surface the problem mid-season.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Dedicated AM training on contracting and Sunfire</h4>
+        <p>AM teams need baseline competency in contracting processes and Sunfire troubleshooting before AEP starts — not just product feature training. They are the first point of contact for APs; they need to be able to answer or triage without escalating everything.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Contracting cutoff dates for new onboardings</h4>
+        <p>Establish a cutoff date for onboarding new agencies before AEP. Handling first-time contracting and onboarding during peak AEP volume is a known strain on both AM and the Contracting team. A hard cutoff would shift that work into a more manageable window.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Centralized source of truth — Notion, not Slack</h4>
+        <p>AEP updates, channel guides, carrier changes, and process docs should live in one structured place. Multiple respondents independently arrived at Notion as the answer. Slack threads work for real-time updates but fail as a reference source, especially for field teams on the road.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Earlier product releases and agency education lead time</h4>
+        <p>New platform features need to be in agencies' hands with enough lead time for AMs to actually teach them. The ask is consistent: get releases out earlier so AM can spend AEP answering questions, not explaining tools they just received themselves.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Separate planning track for telephonic agencies</h4>
+        <p>Field agencies and call center agencies have different workflows, tools, and needs. As Spark onboards more telephonic partners, AEP readiness planning should account for both — including Sunfire Blaze, voice signature compliance, and call center-specific Spark workflows.</p>
+      </div>
+      <div class="insight-card">
+        <h4>Push for RTS earlier — when certs open</h4>
+        <p>A bigger, more proactive push to get agents contracted and RTS as soon as AHIP and carrier certs are available would reduce the end-of-season contracting bottleneck that burdened both AM and the Contracting team this cycle.</p>
+      </div>
+      <div class="insight-card">
+        <h4>More thought leadership content for agency principals</h4>
+        <p>Sales wants more substance to bring to AP relationships: carrier strategy, HRA, ancillary product stacks, and lead generation. More regular webinars and thought leadership positioning would strengthen the AM/Sales value proposition beyond operational support.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY QUOTES -->
+  <div class="section-block">
+    <h3 class="section-block-title">In their own words</h3>
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <blockquote>I wanted my team trained on supporting Sunfire and that training never happened.</blockquote>
+        <div class="attribution">AM — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>Our roles felt very reactive rather than proactive. We were there to put out fires from all the issues arising, rather than staying ahead.</blockquote>
+        <div class="attribution">AM — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>Most of sales think we are the "last to know" but we are the first point of contact for brokers — so the more info and trainings, the better.</blockquote>
+        <div class="attribution">Sales — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>All mapped out in a single place that isn't Slack or Google Sheets — Notion ideally.</blockquote>
+        <div class="attribution">AM — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>We need a better streamlined process to get contracted. Agents with a release still waiting 90 days — that should never happen.</blockquote>
+        <div class="attribution">Sales — Team</div>
+      </div>
+      <div class="quote-card">
+        <blockquote>AEP updates were shared across multiple channels, making it difficult to track what was current — I personally created a reference doc to organize updates by date and topic.</blockquote>
+        <div class="attribution">AM — Team</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<script>
+  function showTab(tabId, el) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    el.classList.add('active');
+  }
+</script>
+</body>
+</html>
